@@ -30,3 +30,4 @@ public class Sample {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }
+//こんにちは
