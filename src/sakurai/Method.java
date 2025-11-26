@@ -9,11 +9,10 @@ public class Method {
 		public  void start(){
 			// コンストラクタの引数でアプリタイトルを設定
 	        JFrame frame = new JFrame("デモアプリ");
-	        // デスクトップに表示する画面のサイズ
-	        frame.setSize(1920,1080);
-	        
-	        // このウィンドウをデスクトップ上に表示する
-	        frame.setVisible(true);
+	     // フルスクリーンにする
+	        frame.setUndecorated(true);
+	        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
 	        
 	        // 画面上に表示するメッセージ
 	        JLabel label = new JLabel("Hello 太一");
@@ -28,7 +27,8 @@ public class Method {
 	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    	windo windo=new windo();
 	    	windo.addButton(frame);
-	        
+	    	frame.setVisible(true);
+
 		}
 		
 		
