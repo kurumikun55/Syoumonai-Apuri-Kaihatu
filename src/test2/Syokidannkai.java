@@ -28,7 +28,7 @@ public class Syokidannkai {
         // 「X」ボタンで画面を閉じたらアプリケーションを終了させる
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        System.out.println("11111111");
+        
 	}
 
 }
