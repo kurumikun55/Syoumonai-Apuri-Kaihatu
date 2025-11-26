@@ -20,7 +20,7 @@ public class Sample {
         JLabel label = new JLabel("Hello 太一");
         label.setFont(new Font("Serif", Font.PLAIN, 250));
         // メッセージを画面上部に表示させる
-        label.setVerticalAlignment(JLabel.TOP);
+        label.setVerticalAlignment(JLabel.CENTER);
         frame.add(label);
         
         // 画面上下左右中央にウィンドウを表示させる
