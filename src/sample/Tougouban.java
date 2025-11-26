@@ -5,7 +5,7 @@ import java.awt.Font;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class Sample {
+public class Tougouban {
 
     public static void main(String[] args) {
         // コンストラクタの引数でアプリタイトルを設定
