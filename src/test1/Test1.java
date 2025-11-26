@@ -37,6 +37,7 @@ public static void main(String[] args) {
 
     // ウィンドウを表示
     frame.setVisible(true);
+    System.out.println();
 }
 }
 
