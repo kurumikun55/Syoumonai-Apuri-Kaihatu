@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class Method {
-		public void start(){
+		public  void start(){
 			// コンストラクタの引数でアプリタイトルを設定
 	        JFrame frame = new JFrame("デモアプリ");
 	        // デスクトップに表示する画面のサイズ
@@ -26,6 +26,9 @@ public class Method {
 	        
 	        // 「X」ボタンで画面を閉じたらアプリケーションを終了させる
 	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    	windo windo=new windo();
+	    	windo.addButton(frame);
+	        
 		}
 		
 		

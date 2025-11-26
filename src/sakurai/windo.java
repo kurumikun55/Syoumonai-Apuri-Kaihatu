@@ -1,4 +1,4 @@
-package watanabe;
+package sakurai;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
