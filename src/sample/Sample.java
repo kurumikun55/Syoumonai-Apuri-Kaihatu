@@ -29,5 +29,4 @@ public class Sample {
         // 「X」ボタンで画面を閉じたらアプリケーションを終了させる
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-}
-//こんにちは
+}//konn
