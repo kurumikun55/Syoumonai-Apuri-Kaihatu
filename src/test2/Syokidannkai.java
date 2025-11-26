@@ -28,7 +28,11 @@ public class Syokidannkai {
         // 「X」ボタンで画面を閉じたらアプリケーションを終了させる
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+<<<<<<< HEAD
        
+=======
+        
+>>>>>>> branch 'master' of https://github.com/kurumikun55/Syoumonai-Apuri-Kaihatu.git
 	}
 
 }
