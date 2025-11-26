@@ -12,6 +12,7 @@ public class windo {
 
 	public static void addButton(JFrame frame) {
         JButton button = new JButton("クリックしてね");
+        //ボタンの背景色をシアンに設定
         button.setBackground(Color.cyan);
         button.setFont(new Font("SansSerif", Font.BOLD, 50));
         frame.add(button, BorderLayout.SOUTH);
