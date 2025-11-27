@@ -1,7 +1,9 @@
 package sakurai;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -26,6 +28,7 @@ public class Method {
 	        // 画面上下左右中央にウィンドウを表示させる
 	        frame.setLocationRelativeTo(null);
 	        
+	       
 	        // 「X」ボタンで画面を閉じたらアプリケーションを終了させる
 	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    	windo windo=new windo();
@@ -42,7 +45,20 @@ public class Method {
 	        frame.add(topPanel, BorderLayout.EAST);
 
 	        frame.setVisible(true);
+	        
+	     // ボタンにアクションを追加
+	        	 loginButton.addActionListener((ActionEvent e) -> {
+	                 // 新しいウィンドウを作成
+	                 JFrame newFrame = new JFrame("新しいウィンドウ");
+	                 newFrame.setSize(250, 150);
+	                 newFrame.setLayout(new FlowLayout());
+	                 newFrame.add(new JLabel("これは新しいウィンドウです"));
+	                 newFrame.setLocationRelativeTo(frame); // メインウィンドウの中央に表示
+	                 newFrame.setVisible(true);
 
+        
+    });
+	       
 		}
 		
 		
