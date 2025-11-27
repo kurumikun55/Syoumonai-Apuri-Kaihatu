@@ -1,9 +1,12 @@
 package sakurai;
 
+import java.awt.BorderLayout;
 import java.awt.Font;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class Method {
 		public  void start(){
@@ -28,6 +31,17 @@ public class Method {
 	    	windo windo=new windo();
 	    	windo.addButton(frame);
 	    	frame.setVisible(true);
+	    	
+	    	
+
+	        // 上パネル（右寄せ）
+	        JPanel topPanel = new JPanel();
+	        JButton loginButton = new JButton("ログイン");
+	        topPanel.add(loginButton);
+
+	        frame.add(topPanel, BorderLayout.EAST);
+
+	        frame.setVisible(true);
 
 		}
 		
