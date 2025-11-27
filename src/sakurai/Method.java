@@ -1,6 +1,5 @@
 
-<<<<<<< HEAD
-=======
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -33,7 +32,7 @@ public class Method {
 	        // 「X」ボタンで画面を閉じたらアプリケーションを終了させる
 	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    	windo windo=new windo();
-	    	windo.addButton(frame);
+	    	windo.addLoginButton(frame);
 	    	frame.setVisible(true);
 	    	
 	    	
@@ -66,4 +65,4 @@ public class Method {
 		
 		
 }
->>>>>>> branch 'master' of https://github.com/kurumikun55/Syoumonai-Apuri-Kaihatu.git
+
