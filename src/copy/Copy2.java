@@ -1,4 +1,4 @@
-package sakurai;
+package copy;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -9,8 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class windo {
-
+public class Copy2 {
 	public static void addLoginButton(JFrame frame) {
 	    JPanel panel = new JPanel(new GridBagLayout());
 
@@ -23,6 +22,4 @@ public class windo {
 	    frame.add(panel, BorderLayout.CENTER);
 	    frame.setVisible(true);
 	}
-
 }
-
