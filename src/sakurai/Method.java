@@ -50,7 +50,7 @@ public class Method {
 	        	 loginButton.addActionListener((ActionEvent e) -> {
 	                 // 新しいウィンドウを作成
 	                 JFrame newFrame = new JFrame("新しいウィンドウ");
-	                 newFrame.setSize(250, 150);
+	                 newFrame.setSize(400, 300);
 	                 newFrame.setLayout(new FlowLayout());
 	                 newFrame.add(new JLabel("これは新しいウィンドウです"));
 	                 newFrame.setLocationRelativeTo(frame); // メインウィンドウの中央に表示
