@@ -52,7 +52,7 @@ public class Method {
 	                 JFrame newFrame = new JFrame("新しいウィンドウ");
 	                 newFrame.setSize(400, 300);
 	                 newFrame.setLayout(new FlowLayout());
-	                 newFrame.add(new JLabel("これは新しいウィンドウです"));
+	                 newFrame.add(new JLabel("これは新しいウィンドウだ"));
 	                 newFrame.setLocationRelativeTo(frame); // メインウィンドウの中央に表示
 	                 newFrame.setVisible(true);
 
