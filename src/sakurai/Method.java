@@ -1,4 +1,4 @@
-
+package sakurai;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -32,7 +32,7 @@ public class Method {
 	        // 「X」ボタンで画面を閉じたらアプリケーションを終了させる
 	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    	windo windo=new windo();
-	    	windo.addLoginButton(frame);
+	    	windo.addButton(frame);
 	    	frame.setVisible(true);
 	    	
 	    	
