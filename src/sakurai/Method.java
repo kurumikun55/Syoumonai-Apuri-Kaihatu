@@ -9,45 +9,49 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class Method {
-	public void start() {
-		// コンストラクタの引数でアプリタイトルを設定
-		JFrame frame = new JFrame("デモアプリ");
-		// フルスクリーンにする
-		frame.setUndecorated(true);
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    public void start() {
+        JFrame frame = new JFrame("デモアプリ");
+        frame.setUndecorated(true);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setLayout(new BorderLayout());
 
-		// 画面上に表示するメッセージ
-		JLabel label = new JLabel("Hello 太一");
-		label.setFont(new Font("Serif", Font.PLAIN, 250));
-		// メッセージを画面上部に表示させる
-		label.setVerticalAlignment(JLabel.CENTER);
-		frame.add(label);
-		// 画面上下左右中央にウィンドウを表示させる
-		frame.setLocationRelativeTo(null);
+        JLabel label = new JLabel("Hello 太一", JLabel.CENTER);
+        label.setFont(new Font("Serif", Font.PLAIN, 250));
+        frame.add(label, BorderLayout.CENTER);
 
-		// 上パネル（右寄せ）
-		JPanel topPanel = new JPanel();
-		JButton loginButton = new JButton("ログイン");
-		topPanel.add(loginButton);
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        JButton loginButton = new JButton("ログイン");
+        topPanel.add(loginButton);
+        frame.add(topPanel, BorderLayout.NORTH);
 
-		frame.add(topPanel, BorderLayout.EAST);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
 
-		frame.setVisible(true);
+        loginButton.addActionListener((ActionEvent e) -> {
+            JFrame jFrame = new JFrame("Java Example");
+            jFrame.setSize(400, 400);
+            jFrame.setLayout(new FlowLayout());
 
-		// ボタンにアクションを追加
-		loginButton.addActionListener((ActionEvent e) -> {
-			// 新しいウィンドウを作成
-			JFrame newFrame = new JFrame("新しいウィンドウ");
-			newFrame.setSize(400, 300);
-			newFrame.setLayout(new FlowLayout());
-			newFrame.add(new JLabel("これは新しいウィンドウだ"));
-			newFrame.setLocationRelativeTo(frame); // メインウィンドウの中央に表示
-			newFrame.setVisible(true);
+            JTextField jTextField = new JTextField(20);
+            JButton jButton = new JButton("Submit");
+            JLabel jLabel = new JLabel();
 
-		});
+            jButton.addActionListener(ev -> {
+                if (!jTextField.getText().isEmpty()) {
+                    jLabel.setText(jTextField.getText());
+                } else {
+                    jLabel.setText("Please write something in the edit box");
+                }
+            });
 
-	}
-
+            jFrame.add(jTextField);
+            jFrame.add(jButton);
+            jFrame.add(jLabel);
+            jFrame.setVisible(true);
+        });
+    }
 }
+
