@@ -45,7 +45,11 @@ public class Method {
                 if (input.isEmpty()) {
                     jLabel.setText("名前を入力してください");
                 } else if (input.equals("田端太一")) {
-                    jLabel.setText("田端太一さん、ようこそ！");
+                    jLabel.setText("田端太一さん、勉強しろ！！");
+                } else if (input.equals("馬場啓太")) {
+                    jLabel.setText("馬場啓太、勉強しろ！！");
+                } else if (input.equals("服部愛星")) {
+                    jLabel.setText("まなせ、勉強しろ！！");
                 } else {
                     jLabel.setText("入力された名前は登録されていません");
                 }
