@@ -40,10 +40,14 @@ public class Method {
             JLabel jLabel = new JLabel();
 
             jButton.addActionListener(ev -> {
-                if (!jTextField.getText().isEmpty()) {
-                    jLabel.setText(jTextField.getText());
+                String input = jTextField.getText().trim(); // 入力を取得して前後の空白を除去
+
+                if (input.isEmpty()) {
+                    jLabel.setText("名前を入力してください");
+                } else if (input.equals("田端太一")) {
+                    jLabel.setText("田端太一さん、ようこそ！");
                 } else {
-                    jLabel.setText("Please write something in the edit box");
+                    jLabel.setText("入力された名前は登録されていません");
                 }
             });
 
