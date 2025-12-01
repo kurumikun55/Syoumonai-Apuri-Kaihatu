@@ -59,6 +59,9 @@ public class Test1 {
                 int value = progressBar.getValue();
                 if (value < 99) {
                     progressBar.setValue(value + 1);
+                } else {
+                    // 99%で止まったらエラーダイアログを再度表示
+                    JOptionPane.showMessageDialog(frame, "ERROR！：頭脳の容量が足りていません");
                 }
             });
             timer.start();
