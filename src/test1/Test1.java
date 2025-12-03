@@ -76,7 +76,7 @@ public class Test1 {
                             i[0]++;
                         } else {
                             ((Timer) ev2.getSource()).stop(); // 全部出したら停止
-                        }
+                   }
                     });
                     dialogTimer.start();
                 }
