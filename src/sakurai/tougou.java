@@ -63,7 +63,7 @@ public class tougou {
 					{
 						if (!popupEnabled) {
 
-							//  5秒後にダイアログを表示
+							//  5秒後にダイアログを表示する
 							Timer delayTimer = new Timer(5000, evt2 -> {
 								showNoCloseDialog(restartFrame);
 							});
