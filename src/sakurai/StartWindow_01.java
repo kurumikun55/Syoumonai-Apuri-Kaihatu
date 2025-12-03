@@ -126,16 +126,17 @@ public class StartWindow_01 {
 
             // 4秒後にエラーダイアログを表示
             Timer timer = new Timer(4000, evt -> {
-               
-
                 // カスタムエラーダイアログを表示
                 JFrame errorDialog = new JFrame("ERROR！");
-                errorDialog.setSize(400, 200);
+                errorDialog.setSize(600, 200);
                 errorDialog.setLocationRelativeTo(null);
                 errorDialog.setLayout(new BorderLayout());
                 errorDialog.getContentPane().setBackground(Color.BLACK);
 
-                JLabel errorLabel = new JLabel("ERROR: IQが足りていません\n再起動が必要です", SwingConstants.CENTER);
+                //×ボタンを無効化
+                errorDialog.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+                JLabel errorLabel = new JLabel("ERROR: IQが足りていません、再起動が必要です", SwingConstants.CENTER);
                 errorLabel.setFont(new Font("SansSerif", Font.BOLD, 22));
                 errorLabel.setForeground(Color.RED);
                 errorDialog.add(errorLabel, BorderLayout.CENTER);
