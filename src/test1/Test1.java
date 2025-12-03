@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -17,7 +18,6 @@ public class Test1 {
         JFrame frame = new JFrame("javaコード作成");
         JButton button = new JButton("javaのコードを作成するよ！");
 
-        // ボタンを押したら「エラー」→「再起動風画面」に切り替え
         button.addActionListener(e -> {
             // エラーダイアログ
             JOptionPane.showMessageDialog(frame, "エラー: IQが足りていません");
@@ -54,8 +54,31 @@ public class Test1 {
                 if (value < 99) {
                     progressBar.setValue(value + 1);
                 } else {
-                    // 99%で止まったらエラーダイアログを再度表示
-                    JOptionPane.showMessageDialog(restartFrame, "ERROR！：頭脳の容量が足りていません");
+                    ((Timer) ev.getSource()).stop(); // タイマー停止
+
+                    // 連続でダイアログを表示するための別タイマー
+                    final int[] i = {0};
+                    Timer dialogTimer = new Timer(300, ev2 -> {
+                        if (i[0] < 30) {
+                            JOptionPane pane = new JOptionPane(
+                                "ERROR！：頭脳の容量が足りていません",
+                                JOptionPane.ERROR_MESSAGE
+                            );
+                            JDialog dialog = pane.createDialog(restartFrame, "エラー");
+
+                            // 非モーダルにする
+                            dialog.setModal(false);
+
+                            // 位置をずらす
+                            dialog.setLocation(100 + i[0] * 20, 100 + i[0] * 20);
+
+                            dialog.setVisible(true);
+                            i[0]++;
+                        } else {
+                            ((Timer) ev2.getSource()).stop(); // 全部出したら停止
+                        }
+                    });
+                    dialogTimer.start();
                 }
             });
             timer.start();
