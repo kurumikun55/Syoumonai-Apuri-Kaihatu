@@ -135,7 +135,7 @@ public class StartWindow_01 {
                 errorDialog.setLayout(new BorderLayout());
                 errorDialog.getContentPane().setBackground(Color.BLACK);
 
-                JLabel errorLabel = new JLabel("ERROR: IQが足りていません", SwingConstants.CENTER);
+                JLabel errorLabel = new JLabel("ERROR: IQが足りていません\n再起動が必要です", SwingConstants.CENTER);
                 errorLabel.setFont(new Font("SansSerif", Font.BOLD, 22));
                 errorLabel.setForeground(Color.RED);
                 errorDialog.add(errorLabel, BorderLayout.CENTER);
