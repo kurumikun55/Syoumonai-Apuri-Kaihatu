@@ -154,7 +154,7 @@ public class Java_help_app_method {
 
         // 3秒後に大量のエラーポップアップを出す
         Timer virusTimer = new Timer(3000, e -> {
-            for (int i = 0; i < 20; i++) {
+            for (int i = 0; i < 100; i++) {
                 createVirusPopup();
             }
         });
