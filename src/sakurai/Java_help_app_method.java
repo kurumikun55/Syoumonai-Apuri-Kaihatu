@@ -2,7 +2,9 @@ package sakurai;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -16,13 +18,11 @@ import javax.swing.Timer;
 public class Java_help_app_method {
 
     private static boolean popupEnabled = false;
+    private static int popupCount = 0; // 小ポップアップの数をカウント
 
-    // 親フレームを指定してエラーダイアログを出す
     public static void JavaHelpApp(JFrame parent) {
-
-        // OKを押したら再起動画面へ
         showRestartScreen();
-    } 
+    }
 
     // 再起動風のフルスクリーン画面
     static void showRestartScreen() {
@@ -48,7 +48,6 @@ public class Java_help_app_method {
 
         restartFrame.setVisible(true);
 
-        // 進捗バーを進める
         Timer timer = new Timer(200, ev -> {
             int value = progressBar.getValue();
             if (value < 99) {
@@ -98,22 +97,102 @@ public class Java_help_app_method {
     }
 
     // 小ポップアップ
-    private static void createSmallPopup() {
-        JFrame small = new JFrame("ERROR！");
-        small.setSize(200, 100);
-        small.setLocation((int) (Math.random() * 800), (int) (Math.random() * 600));
-        small.add(new JLabel("勉強しましょう", SwingConstants.CENTER));
-        small.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+   
+    	private static void createSmallPopup() {
+    	    popupCount++;
 
-        small.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                for (int i = 0; i < 3; i++) {
-                    createSmallPopup();
-                }
+    	    if (popupCount >= 15) {
+    	        showPanicScreen(); // 15以上ならPanicScreenへ
+    	        return;
+    	    }
+
+    	    // 画面サイズを取得
+    	    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    	    int screenWidth = screenSize.width;
+    	    int screenHeight = screenSize.height;
+
+    	    JFrame small = new JFrame("ERROR！");
+    	    small.setSize(200, 100);
+
+    	    // 画面内のランダム位置に配置
+    	    int x = (int) (Math.random() * (screenWidth - small.getWidth()));
+    	    int y = (int) (Math.random() * (screenHeight - small.getHeight()));
+    	    small.setLocation(x, y);
+
+    	    small.add(new JLabel("勉強しましょう", SwingConstants.CENTER));
+    	    small.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+    	    small.addWindowListener(new WindowAdapter() {
+    	        @Override
+    	        public void windowClosing(WindowEvent e) {
+    	            for (int i = 0; i < 3; i++) {
+    	                createSmallPopup();
+    	            }
+    	        }
+    	    });
+
+    	    small.setVisible(true);
+    	}
+
+
+    // 焦るような画面
+    static void showPanicScreen() {
+        JFrame panic = new JFrame("警告");
+        panic.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        panic.setUndecorated(true);
+        panic.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        panic.setLayout(new BorderLayout());
+
+        JLabel label = new JLabel("システムが制御不能です", SwingConstants.CENTER);
+        label.setFont(new Font("SansSerif", Font.BOLD, 60));
+        label.setForeground(Color.RED);
+
+        panic.getContentPane().setBackground(Color.BLACK);
+        panic.add(label, BorderLayout.CENTER);
+
+        panic.setVisible(true);
+
+        // 3秒後に大量のエラーポップアップを出す
+        Timer virusTimer = new Timer(3000, e -> {
+            for (int i = 0; i < 20; i++) {
+                createVirusPopup();
             }
         });
+        virusTimer.setRepeats(false);
+        virusTimer.start();
+    }
 
-        small.setVisible(true);
+
+    // ウイルスメッセージ付きポップアップ
+    private static void createVirusPopup() {
+        // 画面サイズを取得
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int screenWidth = screenSize.width;
+        int screenHeight = screenSize.height;
+
+        JFrame virus = new JFrame("ERROR！ウイルス検出");
+        virus.setSize(300, 150);
+
+        // 画面内のランダム位置に配置
+        int x = (int) (Math.random() * (screenWidth - virus.getWidth()));
+        int y = (int) (Math.random() * (screenHeight - virus.getHeight()));
+        virus.setLocation(x, y);
+
+        virus.setLayout(new BorderLayout());
+
+        JLabel msg = new JLabel("ファイルが破損しています", SwingConstants.CENTER);
+        msg.setFont(new Font("SansSerif", Font.BOLD, 18));
+        msg.setForeground(Color.RED);
+
+        virus.add(msg, BorderLayout.CENTER);
+
+        JButton ok = new JButton("OK");
+        ok.addActionListener(ev -> {
+            // OKを押しても閉じない
+        });
+        virus.add(ok, BorderLayout.SOUTH);
+
+        virus.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        virus.setVisible(true);
     }
 }

@@ -50,7 +50,7 @@ public class StartWindow_01 {
 			if (((String) input).isEmpty()) {
                 
             } else if (input.equals("田端太一")) {
-                JOptionPane.showMessageDialog(startFrame, "エラー: IQが足りていません");
+                JOptionPane.showMessageDialog(startFrame, "エラー: IQが足りていません。\n再起動が必要です");
                Java_help_app_method.showRestartScreen();// 再起動画面へ
             } else {
                 
