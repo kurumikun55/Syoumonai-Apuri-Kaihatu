@@ -143,7 +143,7 @@ public class Java_help_app_method {
         panic.setExtendedState(JFrame.MAXIMIZED_BOTH);
         panic.setLayout(new BorderLayout());
 
-        JLabel label = new JLabel("システムが制御不能です", SwingConstants.CENTER);
+        JLabel label = new JLabel("警告！\nシステムが制御不能です", SwingConstants.CENTER);
         label.setFont(new Font("SansSerif", Font.BOLD, 60));
         label.setForeground(Color.RED);
 
