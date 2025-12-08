@@ -2,6 +2,7 @@ package test1;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -10,187 +11,195 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
 public class Test1 {
 
-	// 99% 到達したかどうかのフラグ
-	private static boolean popupEnabled = false;
+    private static boolean popupEnabled = false;
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
+        // 最初のフレーム
+        JFrame frame = new JFrame("javaコード作成");
+        JButton button = new JButton("javaのコードを作成するよ！");
+        frame.add(button, BorderLayout.CENTER);
 
-		// 最初のフレーム
-		JFrame frame = new JFrame("javaコード作成");
-		JButton button = new JButton("javaのコードを作成するよ！");
+        button.addActionListener(e -> {
+            JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+            JButton loginButton = new JButton("ログイン");
+            topPanel.add(loginButton);
+            frame.add(topPanel, BorderLayout.NORTH);
 
-		// ボタンが押されたら……
-		button.addActionListener(e -> {
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
 
-			JOptionPane.showMessageDialog(frame, "エラー: IQが足りていません");
+            loginButton.addActionListener(ev -> showLoginFrame(frame));
+        });
 
-			// 再起動風のフルスクリーンフレーム
-			JFrame restartFrame = new JFrame("偽の再起動アプリ");
-			restartFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-			restartFrame.setUndecorated(true);
-			restartFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-			restartFrame.setLayout(new BorderLayout());
+        frame.setSize(300, 200);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
 
-			// 進捗バー
-			JProgressBar progressBar = new JProgressBar(0, 100);
-			progressBar.setStringPainted(true);
+    // ログイン用フレーム
+    private static void showLoginFrame(JFrame parent) {
+        JFrame jFrame = new JFrame("Java Example");
+        jFrame.setSize(400, 400);
+        jFrame.setLayout(new FlowLayout());
 
-			JLabel label = new JLabel("再起動中…", SwingConstants.CENTER);
-			label.setFont(new Font("SansSerif", Font.BOLD, 40));
-			label.setForeground(Color.WHITE);
+        JTextField jTextField = new JTextField(20);
+        JButton jButton = new JButton("Submit");
+        JLabel jLabel = new JLabel();
 
-			restartFrame.getContentPane().setBackground(Color.BLACK);
-			progressBar.setBackground(Color.BLACK);
-			progressBar.setForeground(Color.GREEN);
+        jButton.addActionListener(ev -> {
+            String input = jTextField.getText().trim();
 
-			restartFrame.add(progressBar, BorderLayout.SOUTH);
-			restartFrame.add(label, BorderLayout.CENTER);
+            if (input.isEmpty()) {
+                jLabel.setText("名前を入力してください");
+            } else if (input.equals("田端太一")) {
+                JOptionPane.showMessageDialog(parent, "エラー: IQが足りていません");
+                showRestartFrame();
+            } else {
+                jLabel.setText("入力された名前は登録されていません");
+            }
+        });
 
-			restartFrame.setVisible(true);
+        jFrame.add(jTextField);
+        jFrame.add(jButton);
+        jFrame.add(jLabel);
+        jFrame.setVisible(true);
+    }
 
-			// 進捗バー進行（99% 到達でフラグを ON にする）
-			Timer timer = new Timer(200, ev -> {
-				int value = progressBar.getValue();
-				if (value < 99) {
-					progressBar.setValue(value + 1);
-				} else {
-					{
-						if (!popupEnabled) {
+    // 再起動風フレーム
+    private static void showRestartFrame() {
+        JFrame restartFrame = new JFrame("偽の再起動アプリ");
+        restartFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        restartFrame.setUndecorated(true);
+        restartFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        restartFrame.setLayout(new BorderLayout());
 
-							//  5秒後にダイアログを表示する
-							Timer delayTimer = new Timer(5000, evt2 -> {
-								showNoCloseDialog(restartFrame);
-							});
-							delayTimer.setRepeats(false); // 1回だけ実行
-							delayTimer.start();
+        JProgressBar progressBar = new JProgressBar(0, 100);
+        progressBar.setStringPainted(true);
 
-							popupEnabled = true;//増殖可能にする
-						}
-					}
-				}
-			});
-			timer.start();
+        JLabel label = new JLabel("再起動中…", SwingConstants.CENTER);
+        label.setFont(new Font("SansSerif", Font.BOLD, 40));
+        label.setForeground(Color.WHITE);
 
-			// × を押したら？
-			restartFrame.addWindowListener(new WindowAdapter() {
-				@Override
-				public void windowClosing(WindowEvent e) {
+        restartFrame.getContentPane().setBackground(Color.BLACK);
+        progressBar.setBackground(Color.BLACK);
+        progressBar.setForeground(Color.GREEN);
 
-					if (popupEnabled) { // 99% 到達していれば増殖！
-						for (int i = 0; i < 3; i++) {
-							createPopup();
-						}
-					} else {
-						// 99%未満なら閉じてほしくないだけ
-						JOptionPane.showMessageDialog(restartFrame,
-								"システム再起動中です…");
-					}
+        restartFrame.add(progressBar, BorderLayout.SOUTH);
+        restartFrame.add(label, BorderLayout.CENTER);
+        restartFrame.setVisible(true);
 
-				}
-			});
-		});
+        Timer timer = new Timer(200, ev -> {
+            int value = progressBar.getValue();
+            if (value < 99) {
+                progressBar.setValue(value + 1);
+            } else {
+                if (!popupEnabled) {
+                    Timer delayTimer = new Timer(5000, evt2 -> showNoCloseDialog(restartFrame));
+                    delayTimer.setRepeats(false);
+                    delayTimer.start();
+                    popupEnabled = true;
+                }
+            }
+        });
+        timer.start();
 
-		frame.add(button);
-		frame.setSize(300, 200);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
-	}
+        restartFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                if (popupEnabled) {
+                    for (int i = 0; i < 3; i++) {
+                        createPopup();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(restartFrame, "システム再起動中です…");
+                }
+            }
+        });
+    }
 
-	// メインポップアップ（×で3つ増える）
-	private static void createPopup() {
-		JFrame frame = new JFrame("ERROR！");
-		frame.setSize(300, 160);
-		frame.setLocationRelativeTo(null);
-		frame.setLayout(new BorderLayout());
+    // 大ポップアップ
+    private static void createPopup() {
+        JFrame frame = new JFrame("ERROR！");
+        frame.setSize(300, 160);
+        frame.setLocationRelativeTo(null);
+        frame.setLayout(new BorderLayout());
 
-		// メッセージ
-		JLabel label = new JLabel("勉強をしましょう", SwingConstants.CENTER);
-		frame.add(label, BorderLayout.CENTER);
+        JLabel label = new JLabel("勉強をしましょう", SwingConstants.CENTER);
+        frame.add(label, BorderLayout.CENTER);
 
-		// OKボタン
-		JButton okButton = new JButton("OK");
-		frame.add(okButton, BorderLayout.SOUTH);
+        JButton okButton = new JButton("OK");
+        frame.add(okButton, BorderLayout.SOUTH);
 
-		// OK を押しても閉じない
-		okButton.addActionListener(e -> {
-			// ここに好きな処理を追加できる
-			// 例: もっと増やすなど
-			createSmallPopup();
-		});
+        okButton.addActionListener(e -> createSmallPopup());
 
-		// × を押しても閉じない
-		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                for (int i = 0; i < 3; i++) {
+                    createSmallPopup();
+                }
+            }
+        });
 
-		frame.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				for (int i = 0; i < 3; i++) {
-					createSmallPopup();
-				}
-			}
-		});
+        frame.setVisible(true);
+    }
 
-		frame.setVisible(true);
-	}
+    // 小ポップアップ
+    private static void createSmallPopup() {
+        JFrame small = new JFrame("ERROR！");
+        small.setSize(200, 100);
+        small.setLocation((int) (Math.random() * 800), (int) (Math.random() * 600));
+        small.add(new JLabel("勉強しましょう", SwingConstants.CENTER));
+        small.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
-	// 小ポップアップ（×で3つ増える）
-	private static void createSmallPopup() {
-		JFrame small = new JFrame("ERROR！");
-		small.setSize(200, 100);
+        small.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                for (int i = 0; i < 3; i++) {
+                    createSmallPopup();
+                }
+            }
+        });
 
-		small.setLocation(
-				(int) (Math.random() * 800),
-				(int) (Math.random() * 600));
+        small.setVisible(true);
+    }
 
-		small.add(new JLabel("勉強しましょう", SwingConstants.CENTER));
-		small.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+    // エラーダイアログ
+    private static void showNoCloseDialog(JFrame parent) {
+        JFrame dialog = new JFrame("ERROR！");
+        dialog.setSize(400, 180);
+        dialog.setLocationRelativeTo(parent);
+        dialog.setLayout(new BorderLayout());
+        dialog.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
-		small.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				for (int i = 0; i < 3; i++) {
-					createSmallPopup();//ポップアップ増やす
-				}
-			}
-		});
+        JLabel label = new JLabel("ERROR！：頭脳の容量が足りていません", SwingConstants.CENTER);
+        label.setFont(new Font("SansSerif", Font.BOLD, 16));
+        dialog.add(label, BorderLayout.CENTER);
 
-		small.setVisible(true);
-	}// OK を押しても閉じないカスタムエラーダイアログ
+        JButton ok = new JButton("OK");
+        ok.addActionListener(e -> {
+            // OKでも閉じない
+        });
+        dialog.add(ok, BorderLayout.SOUTH);
 
-	private static void showNoCloseDialog(JFrame parent) {
-		JFrame dialog = new JFrame("ERROR！");
-		dialog.setSize(400, 180);
-		dialog.setLocationRelativeTo(parent);
-		dialog.setLayout(new BorderLayout());
-		dialog.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        dialog.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                for (int i = 0; i < 3; i++) {
+                    createSmallPopup();
+                }
+            }
+        });
 
-		JLabel label = new JLabel("ERROR！：頭脳の容量が足りていません", SwingConstants.CENTER);
-		label.setFont(new Font("SansSerif", Font.BOLD, 16));
-		dialog.add(label, BorderLayout.CENTER);
-
-		JButton ok = new JButton("OK");
-		ok.addActionListener(e -> {
-			// OK でも閉じない
-		});
-		dialog.add(ok, BorderLayout.SOUTH);
-
-		//  × を押したときの増殖処理
-		dialog.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				// ここで好きな増え方にできる
-				for (int i = 0; i < 3; i++) {
-					createSmallPopup(); // 小ポップアップ3つ出す
-				}
-			}
-		});
-
-		dialog.setVisible(true);
-	}
+        dialog.setVisible(true);
+    }
 }
