@@ -25,7 +25,7 @@ public class Java_help_app_method {
     } 
 
     // 再起動風のフルスクリーン画面
-    private static void showRestartScreen() {
+    static void showRestartScreen() {
         JFrame restartFrame = new JFrame("偽の再起動アプリ");
         restartFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         restartFrame.setUndecorated(true);

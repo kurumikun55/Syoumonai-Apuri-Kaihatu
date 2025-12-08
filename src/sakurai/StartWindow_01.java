@@ -10,6 +10,7 @@ import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -45,6 +46,14 @@ public class StartWindow_01 {
 
         startButton.addActionListener(e -> {
             String name = nameField.getText();
+            Object input = name;
+			if (((String) input).isEmpty()) {
+                
+            } else if (input.equals("田端太一")) {
+                JOptionPane.showMessageDialog(startFrame, "エラー: IQが足りていません");
+               Java_help_app_method.showRestartScreen();// 再起動画面へ
+            } else {
+                
          // 2ページ目のウィンドウ
             JFrame nextFrame = new JFrame("別ウィンドウ");
             nextFrame.setUndecorated(true);
@@ -91,6 +100,7 @@ public class StartWindow_01 {
 
             nextFrame.setVisible(true);
             startFrame.dispose();
+            }
         });
 
         startFrame.add(inputPanel, BorderLayout.CENTER);
